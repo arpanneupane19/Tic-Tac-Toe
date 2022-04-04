@@ -1,5 +1,4 @@
 import random
-from re import I
 
 
 class TicTacToe:
@@ -32,7 +31,7 @@ class TicTacToe:
             if self.player_turn_choice == self.winner:
                 return "You win!"
             elif self.player_turn_choice != self.winner:
-                return "Computer wins!"
+                return "The AI wins!"
         else:
             return f"{self.winner} wins!"
 
@@ -73,14 +72,16 @@ class TicTacToe:
             if self.play_against_computer:
                 if self.turn != self.player_turn_choice:
                     usr_input = random.randint(1, 9)
-                    print('Computer picked: ', usr_input, '\n')
+                    print(f'The AI picked {usr_input} \n')
                 elif self.turn == self.player_turn_choice:
                     usr_input = int(
                         input(f"{self.turn}'s turn. Pick a spot from 1-9: "))
-                    print(f'You picked: {usr_input}\n')
+                    print("\n")
+                    print(f'You picked {usr_input} \n')
             else:
                 usr_input = int(
                     input(f"{self.turn}'s turn. Pick a spot from 1-9: "))
+                print("\n")
                 print(f'{self.turn} picked: {usr_input}\n')
             if usr_input >= 1 and usr_input <= 9:
                 if usr_input >= 1 and usr_input <= 3:
@@ -91,7 +92,7 @@ class TicTacToe:
                         self.check_if_draw()
                         self.change_turn()
                     else:
-                        print("Spot is taken.")
+                        print("Spot is taken.", '\n')
                 if usr_input >= 4 and usr_input <= 6:
                     if self.board[1][usr_input - 4] == "-":
                         self.board[1][usr_input - 4] = self.turn
@@ -100,7 +101,7 @@ class TicTacToe:
                         self.check_if_draw()
                         self.change_turn()
                     else:
-                        print("Spot is taken.")
+                        print("Spot is taken.", '\n')
                 if usr_input >= 7 and usr_input <= 9:
                     if self.board[2][usr_input - 7] == "-":
                         self.board[2][usr_input - 7] = self.turn
@@ -109,22 +110,23 @@ class TicTacToe:
                         self.check_if_draw()
                         self.change_turn()
                     else:
-                        print("Spot is taken.")
+                        print("Spot is taken.", '\n')
             else:
-                print("Invalid spot.")
+                print("Invalid spot.", "\n")
 
     def play(self, play_against_computer):
         if play_against_computer:
             self.play_against_computer = True
             pick_turn = str(input("Pick X or O: ")).upper()
+            print('\n')
             if pick_turn == "X":
                 self.turn = "X"
                 self.player_turn_choice = "X"
-                print("You are X. AI is O.")
+                print("You are X. AI is O. \n")
             elif pick_turn == "O":
                 self.turn = "O"
                 self.player_turn_choice = "O"
-                print("You are O. AI is X.")
+                print("You are O. AI is X. \n")
             else:
                 print("Invalid choice.")
             self.print_board()
