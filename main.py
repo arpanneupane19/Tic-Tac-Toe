@@ -49,7 +49,7 @@ class TicTacToe:
         if (self.board[0][0] == "X" and self.board[1][0] == "X" and self.board[2][0] == "X") or (self.board[0][1] == "X" and self.board[1][1] == "X" and self.board[2][1] == "X") or (self.board[0][2] == "X" and self.board[1][2] == "X" and self.board[2][2] == "X"):
             self.winner = "X"
             print(self.print_winner())
-        if (self.board[0][0] == "O" and self.board[1][0] == "O" and self.board[2][0] == "O") or (self.board[0][1] == "O" and self.board[1][1] == "O" and self.board[2][1] == "O") or (self.board[0][2] == "O" and self.board[1][2] == "O" and self.board[2][2] == "O"):
+        elif (self.board[0][0] == "O" and self.board[1][0] == "O" and self.board[2][0] == "O") or (self.board[0][1] == "O" and self.board[1][1] == "O" and self.board[2][1] == "O") or (self.board[0][2] == "O" and self.board[1][2] == "O" and self.board[2][2] == "O"):
             self.winner = "O"
             print(self.print_winner())
 
@@ -57,15 +57,16 @@ class TicTacToe:
         if (self.board[0][0] == "X" and self.board[1][1] == "X" and self.board[2][2] == "X") or (self.board[0][2] == "X" and self.board[1][1] == "X" and self.board[2][0] == "X"):
             self.winner = "X"
             print(self.print_winner())
-        if (self.board[0][0] == "O" and self.board[1][1] == "O" and self.board[2][2] == "O") or (self.board[0][2] == "O" and self.board[1][1] == "O" and self.board[2][0] == "O"):
+        elif (self.board[0][0] == "O" and self.board[1][1] == "O" and self.board[2][2] == "O") or (self.board[0][2] == "O" and self.board[1][1] == "O" and self.board[2][0] == "O"):
             self.winner = "O"
             print(self.print_winner())
 
     def check_if_draw(self):
         # check if - is in any spaces
-        if (self.board[0][0] != "-" and self.board[0][1] != '-' and self.board[0][2] != '-') and (self.board[1][0] != '-' and self.board[1][1] != '-' and self.board[1][2] != '-') and (self.board[2][0] != '-' and self.board[2][1] != '-' and self.board[2][2] != '-'):
-            print("Draw!")
-            self.winner = "Draw!"
+        if self.winner is None:
+            if (self.board[0][0] != "-" and self.board[0][1] != '-' and self.board[0][2] != '-') and (self.board[1][0] != '-' and self.board[1][1] != '-' and self.board[1][2] != '-') and (self.board[2][0] != '-' and self.board[2][1] != '-' and self.board[2][2] != '-'):
+                self.winner = "Draw!"
+                print("Draw!")
 
     def play_turn(self):
         while self.winner is None:
@@ -117,18 +118,20 @@ class TicTacToe:
     def play(self, play_against_computer):
         if play_against_computer:
             self.play_against_computer = True
-            pick_turn = str(input("Pick X or O: ")).upper()
-            print('\n')
-            if pick_turn == "X":
-                self.turn = "X"
-                self.player_turn_choice = "X"
-                print("You are X. AI is O. \n")
-            elif pick_turn == "O":
-                self.turn = "O"
-                self.player_turn_choice = "O"
-                print("You are O. AI is X. \n")
-            else:
-                print("Invalid choice.")
+            while self.turn is None:
+                pick_turn = str(input("Pick X or O: ")).upper()
+                print('\n')
+                if pick_turn == "X":
+                    self.turn = "X"
+                    self.player_turn_choice = "X"
+                    print("You are X. AI is O. \n")
+                elif pick_turn == "O":
+                    self.turn = "O"
+                    self.player_turn_choice = "O"
+                    print("You are O. AI is X. \n")
+                else:
+                    print("Invalid choice.")
+                    print("\n")
             self.print_board()
             self.play_turn()
 
